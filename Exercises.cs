@@ -263,5 +263,22 @@ namespace entra21_tests
             }
             return result;
         }
+
+        public int[] Exercise16(double[] num)
+        {
+            var result = new int[2];
+            for (int i = 0; i < num.Length; i++)
+            {
+                if((num[i] % 3) == 0)
+                {
+                    result[0]++;
+                }
+                if((num[i] % 5) == 0)
+                {
+                    result[1]++;
+                }
+            }
+            return result;
+        }
     }
 }

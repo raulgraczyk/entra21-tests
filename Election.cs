@@ -6,12 +6,12 @@ namespace entra21_tests
     {
         //propriedade abaixo:
         //sempre em PascalCase
-        public int Candidates
+        //public int Candidates
         public bool CreateCandidates(List<(int id, string name)> candidates, string password)
         {
             if(password == "Pa$$w0rd")
             {
-                myCandidates = candidates;
+                var myCandidates = candidates;
                 return true;
             }
             else
@@ -20,9 +20,9 @@ namespace entra21_tests
             }
         }
 
-        public bool GetCandidates()
-        {
-            return
-        }
+        // public bool GetCandidates()
+        // {
+        //     return 
+        // }
     }
 }

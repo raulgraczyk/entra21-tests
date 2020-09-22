@@ -45,5 +45,56 @@ namespace entra21_tests
                 Assert.Equal(expected[i], result[i]);
             }
         }
+
+        [Theory]
+        [InlineData(new double[10]{1,2,3,4,5,6,7,8,9,10}, 2, "O número existe no array")]
+        [InlineData(new double[10]{2,4,8,16,32,64,128,256,512,1024}, 16, "O número existe no array")]
+        [InlineData(new double[10]{4,8,12,16,20,24,28,32,36,40}, 50, "Número inexistente")]
+        public void test_exercise3_of_array01(double[] a, double num, string expected)
+        {
+            // Dado / Setup
+            var array01 = new array01();
+
+            // Quando / Ação
+            var result = array01.AExercise3(a, num);
+
+            // Deve / Asserções
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(new double[10]{1,2,3,4,5,6,7,8,9,10}, new double[10]{1,2,3,4,5,6,7,8,9,10}, "As listas são iguais")]
+        [InlineData(new double[10]{2,4,8,16,32,64,128,256,512,1024}, new double[10]{1,3,3,4,5,6,7,8,9,10}, "As listas são diferentes")]
+        [InlineData(new double[10]{4,8,12,16,20,24,28,32,36,40}, new double[10]{4,8,12,16,20,24,28,32,36,40}, "As listas são iguais")]
+        public void test_exercise4_of_array01(double[] a, double[] b, string expected)
+        {
+            // Dado / Setup
+            var array01 = new array01();
+
+            // Quando / Ação
+            string result = array01.AExercise4(a, b);
+
+            // Deve / Asserções
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(new double[15]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}, new int[3]{7,1,7})]
+        [InlineData(new double[15]{2,4,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768}, new int[3]{12,0,3})]
+        [InlineData(new double[15]{4,8,12,16,20,24,28,32,36,40,44,48,52,56,60}, new int[3]{7,1,7})]
+        public void test_exercise5_of_array01(double[] a, int[] expected)
+        {
+            // Dado / Setup
+            var array01 = new array01();
+
+            // Quando / Ação
+            var result = array01.AExercise5(a);
+
+            // Deve / Asserções
+
+            Assert.Equal(expected, result);
+        }
     }
 }
