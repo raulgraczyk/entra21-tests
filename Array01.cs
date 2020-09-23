@@ -93,5 +93,24 @@ namespace entra21_tests
             }
             return result;
         }
+
+        public double[] AExercise6(double[] a, double[] b)
+        {
+            //A com 12 elementos ordem crescente. B com doze elementos em ordem decrescente. 
+            //Construir um array C, onde cada elemento de C é a soma do elemento correspondente de A com b. 
+            //Colocar em ordem crescente a matriz C e apresentar os seus valores.
+
+            var result = new double[12];
+            
+            Array.Sort(a);
+            Array.Sort(b);
+            Array.Reverse(b);
+            for (int i = 0; i < a.Length; i++)
+            {
+                result[i] = a[i] + b[i];
+            }
+            Array.Sort(result);
+            return result;
+        }
     }
 }

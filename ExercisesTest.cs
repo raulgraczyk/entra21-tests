@@ -274,7 +274,7 @@ namespace entra21_tests
             bool result = Exercises.Exercise9(n1,n2,n3);
 
             // Deve / Asserções
-            Assert.Equal(true, result);
+            Assert.True(result);
         }
 
         [Fact]

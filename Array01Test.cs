@@ -96,5 +96,24 @@ namespace entra21_tests
 
             Assert.Equal(expected, result);
         }
+
+        [Theory]
+        [InlineData
+        (new double[12]{12,5,8,9,2,6,3,4,7,11,10,1}, new double[12]{54,56,32,17,69,51,24,35,85,6,41,25}, new double[12]{18,28,34,34,40,42,47,56,58,59,71,86})]
+        public void test_exercise6_of_array01(double[] a, double[] b, double[] expected)
+        {
+            // Dado / Setup
+            var array01 = new array01();
+
+            // Quando / Ação
+            var result = array01.AExercise6(a, b);
+
+            // Deve / Asserções
+            for (int i = 0; i < result.Length; i++)
+            {
+                Assert.Equal(expected[i], result[i]);
+            }
+            Assert.Equal(expected, result);
+        }
     }
 }
