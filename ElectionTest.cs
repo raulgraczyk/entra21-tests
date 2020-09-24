@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -50,17 +51,70 @@ namespace entra21_tests
 
             // OBJETO election
             var election = new Election();
-            (string name, string cpf) Jose = ("José","180.625.639-87");
+            (string name, string cpf) jose = ("José","180.625.639-87");
             (string name, string cpf) ana = ("Ana","111.222.333-44");
-            var candidates = new List<(string,string)>{Jose, ana};
+            var candidates = new List<(string,string)>{jose, ana};
             election.CreateCandidates(candidates, "Pa$$w0rd");
             
             // Quando / Ação
-            var candidateJose = election.GetCandidateIdByName(Jose.name);
+            var candidatejose = election.GetCandidateIdByName(jose.name);
             var candidateana = election.GetCandidateIdByName(ana.name);
 
             // Deve / Asserções
-            Assert.NotEqual(candidateana, candidateJose);
+            Assert.NotEqual(candidateana, candidatejose);
+        }
+
+        [Fact]
+        public void should_return_a_list_of_ids()
+        {
+            // Dado / Setup
+
+            // OBJETO election
+            var election = new Election();
+            (string name, string cpf) jose1 = ("José","180.625.639-87");
+            (string name, string cpf) joao = ("João","123.456.789.12");
+            (string name, string cpf) jose2 = ("José","987.654.321.98");
+            (string name, string cpf) ana = ("Ana","111.222.333-44");
+            (string name, string cpf) jose3 = ("José","999.999.999.99");
+            var candidates = new List<(string,string)>{jose1, joao, jose2, ana, jose3};
+            election.CreateCandidates(candidates, "Pa$$w0rd");
+            
+            // Quando / Ação
+            var candidatesJoseId = election.GetCandidatesIdByName("José");
+            //var expectedIds = new List<Guid>{};
+            // Deve / Asserções
+            Assert.Equal(3,candidatesJoseId.Count);
+            Assert.NotEqual(0,candidatesJoseId.Count);
+            Assert.NotEqual(candidatesJoseId[0],candidatesJoseId[1]);
+            Assert.NotEqual(candidatesJoseId[1],candidatesJoseId[2]);
+            Assert.NotEqual(candidatesJoseId[2],candidatesJoseId[0]);
+        }
+
+        [Fact]
+        public void should_return_a_list_of_cpfs()
+        {
+            // Dado / Setup
+
+            // OBJETO election
+            var election = new Election();
+            (string name, string cpf) jose1 = ("José","180.625.639-87");
+            (string name, string cpf) joao = ("João","123.456.789.12");
+            (string name, string cpf) jose2 = ("José","987.654.321.98");
+            (string name, string cpf) ana = ("Ana","111.222.333-44");
+            (string name, string cpf) jose3 = ("José","999.999.999.99");
+            var candidates = new List<(string,string)>{jose1, joao, jose2, ana, jose3};
+            election.CreateCandidates(candidates, "Pa$$w0rd");
+            
+            // Quando / Ação
+            var candidatesJoseCpf = election.GetCandidatesCpfByName("José");
+            var expectedCpfs = new List<string>{"180.625.639-87","987.654.321.98","999.999.999.99"};
+            // Deve / Asserções
+            Assert.Equal(3,candidatesJoseCpf.Count);
+            Assert.NotEqual(0,candidatesJoseCpf.Count);
+            Assert.NotEqual(candidatesJoseCpf[0],candidatesJoseCpf[1]);
+            Assert.NotEqual(candidatesJoseCpf[1],candidatesJoseCpf[2]);
+            Assert.NotEqual(candidatesJoseCpf[2],candidatesJoseCpf[0]);
+            Assert.Equal(expectedCpfs,candidatesJoseCpf);
         }
 
         [Fact]

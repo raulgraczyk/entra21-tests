@@ -34,6 +34,18 @@ namespace entra21_tests
             return Candidates.First(x => x.name == name).id;
         }
 
+        // public List<Guid> GetCandidatesIdByName(string name)
+        // {
+        //     var  foundCandidates = Candidates.Where(x => x.name == name);
+        //     return foundCandidates.Select(x => x.id ).ToList();
+        // }
+
+        public List<string> GetCandidatesCpfByName(string name)
+        {
+            var  foundCandidates = Candidates.Where(x => x.name == name);
+            return foundCandidates.Select(x => x.cpf).ToList();
+        }
+
         public Guid GetCandidateIdByCpf(string cpf)
         {
             return Candidates.First(x => x.cpf == cpf).id;
@@ -46,6 +58,12 @@ namespace entra21_tests
                     ? (candidate.id, candidate.name, candidate.cpf, candidate.votes + 1)
                     : candidate;
             }).ToList();
+        }
+
+        public List<Guid> GetCandidatesIdByName(string name)
+        {
+            var foundCandidates = Candidates.Where(x => x.name == name);
+            return foundCandidates.Select(x => x.id).ToList();
         }
 
         public List<(Guid id, string name, string cpf, int votes)> GetWinners()
