@@ -8,15 +8,13 @@ namespace entra21_tests
     {
         // Propriedade abaixo:
         // Sempre em PascalCase
-        public List<(Guid id, string name, string cpf, int votes)> Candidates { get; set; }
+        public List<Candidate> Candidates { get; private set; }
         
-        public bool CreateCandidates(List<(string name, string cpf)> candidate, string password)
+        public bool CreateCandidates(List<Candidate> candidate, string password)
         {
             if (password == "Pa$$w0rd")
             {
-                Candidates = candidate.Select(candidate => {
-                    return (Guid.NewGuid(), candidate.name, candidate.cpf, 0);
-                }).ToList();
+                Candidates = candidate;
 
                 return true;
             }
@@ -31,7 +29,7 @@ namespace entra21_tests
         // ToDo: Este método deve retornar a lista de candidatos que tem o mesmo nome informado
         public Guid GetCandidateIdByName(string name)
         {
-            return Candidates.First(x => x.name == name).id;
+            return Candidates.First(x => x.Name == name).Id;
         }
 
         // public List<Guid> GetCandidatesIdByName(string name)
@@ -42,28 +40,34 @@ namespace entra21_tests
 
         public List<string> GetCandidatesCpfByName(string name)
         {
-            var  foundCandidates = Candidates.Where(x => x.name == name);
-            return foundCandidates.Select(x => x.cpf).ToList();
+            var  foundCandidates = Candidates.Where(x => x.Name == name);
+            return foundCandidates.Select(x => x.Cpf).ToList();
         }
 
         public Guid GetCandidateIdByCpf(string cpf)
         {
-            return Candidates.First(x => x.cpf == cpf).id;
+            return Candidates.First(x => x.Cpf == cpf).Id;
         }
 
         public void Vote(Guid id)
         {
             Candidates = Candidates.Select(candidate => {
-                return candidate.id == id
-                    ? (candidate.id, candidate.name, candidate.cpf, candidate.votes + 1)
+                return candidate.Id == id
+                    ? (candidate.Id, candidate.Name, candidate.Cpf, candidate.Votes + 1)
                     : candidate;
             }).ToList();
         }
 
         public List<Guid> GetCandidatesIdByName(string name)
         {
-            var foundCandidates = Candidates.Where(x => x.name == name);
-            return foundCandidates.Select(x => x.id).ToList();
+            var foundCandidates = Candidates.Where(x => x.Name == name);
+            return foundCandidates.Select(x => x.Id).ToList();
+        }
+
+        public List<Candidate> GetCandidatesByName(string name)
+        {
+            var foundCandidates = Candidates.Where(x => x.Name == name);
+            return foundCandidates.ToList();
         }
 
         public List<(Guid id, string name, string cpf, int votes)> GetWinners()

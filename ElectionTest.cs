@@ -11,7 +11,8 @@ namespace entra21_tests
         {
             // Dado / Setup
             var election = new Election();
-            var candidates = new List<(string, string)>{("José","180.625.639-87")};
+            var jose = new Candidate("José","001.002.003-04");
+            var candidates = new List<Candidate>{jose};
 
             // Quando / Ação
             var created = election.CreateCandidates(candidates, "incorrect");
@@ -28,9 +29,8 @@ namespace entra21_tests
 
             // OBJETO election
             var election = new Election();
-            (string name, string cpf) candidate = ("José","180.625.639-87");
-            var candidates = new List<(string name, string cpf)>{candidate};
-
+            var jose = new Candidate("José","180.625.639-87");
+            var candidates = new List<Candidate>{jose};
             // Quando / Ação
 
             // Estamos acessando o MÉTODO CreateCandidates do OBJETO election
@@ -84,10 +84,33 @@ namespace entra21_tests
             //var expectedIds = new List<Guid>{};
             // Deve / Asserções
             Assert.Equal(3,candidatesJoseId.Count);
-            Assert.NotEqual(0,candidatesJoseId.Count);
             Assert.NotEqual(candidatesJoseId[0],candidatesJoseId[1]);
             Assert.NotEqual(candidatesJoseId[1],candidatesJoseId[2]);
             Assert.NotEqual(candidatesJoseId[2],candidatesJoseId[0]);
+        }
+
+        [Fact]
+        public void should_return_a_list_of_candidates()
+        {
+            // Dado / Setup
+
+            // OBJETO election
+            var election = new Election();
+            (string name, string cpf) jose1 = ("José","180.625.639-87");
+            (string name, string cpf) joao = ("João","123.456.789.12");
+            (string name, string cpf) jose2 = ("José","987.654.321.98");
+            (string name, string cpf) ana = ("Ana","111.222.333-44");
+            (string name, string cpf) jose3 = ("José","999.999.999.99");
+            var candidates = new List<(string,string)>{jose1, joao, jose2, ana, jose3};
+            election.CreateCandidates(candidates, "Pa$$w0rd");
+            
+            // Quando / Ação
+            var candidatesList = election.GetCandidatesByName("José");
+            //var expectedIds = new List<Guid>{};
+            // Deve / Asserções
+            Assert.Equal("180.625.639-87",candidatesList[0].cpf);
+            Assert.Equal("987.654.321.98",candidatesList[1].cpf);
+            Assert.Equal("999.999.999.99",candidatesList[2].cpf);
         }
 
         [Fact]
@@ -110,7 +133,6 @@ namespace entra21_tests
             var expectedCpfs = new List<string>{"180.625.639-87","987.654.321.98","999.999.999.99"};
             // Deve / Asserções
             Assert.Equal(3,candidatesJoseCpf.Count);
-            Assert.NotEqual(0,candidatesJoseCpf.Count);
             Assert.NotEqual(candidatesJoseCpf[0],candidatesJoseCpf[1]);
             Assert.NotEqual(candidatesJoseCpf[1],candidatesJoseCpf[2]);
             Assert.NotEqual(candidatesJoseCpf[2],candidatesJoseCpf[0]);
