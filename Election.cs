@@ -51,11 +51,11 @@ namespace entra21_tests
 
         public void Vote(Guid id)
         {
-            Candidates = Candidates.Select(candidate => {
-                return candidate.Id == id
-                    ? (candidate.Id, candidate.Name, candidate.Cpf, candidate.Votes + 1)
-                    : candidate;
-            }).ToList();
+            Candidates.First(candidate => candidate.Id == id).Votes++;
+                    //return candidate.Id == id
+                    //? (Candidate.Vote +1)
+                    //: candidate;
+           // }).ToList();
         }
 
         public List<Guid> GetCandidatesIdByName(string name)
@@ -70,18 +70,18 @@ namespace entra21_tests
             return foundCandidates.ToList();
         }
 
-        public List<(Guid id, string name, string cpf, int votes)> GetWinners()
+        public List<Candidate> GetWinners()
         {
-            var winners = new List<(Guid id, string name, string cpf, int votes)>{Candidates[0]};
+            var winners = new List<Candidate>{Candidates[0]};
 
             for (int i = 1; i < Candidates.Count; i++)
             {
-                if (Candidates[i].votes > winners[0].votes)
+                if (Candidates[i].Votes > winners[0].Votes)
                 {
                     winners.Clear();
                     winners.Add(Candidates[i]);
                 }
-                else if (Candidates[i].votes == winners[0].votes)
+                else if (Candidates[i].Votes == winners[0].Votes)
                 {
                     winners.Add(Candidates[i]);
                 }

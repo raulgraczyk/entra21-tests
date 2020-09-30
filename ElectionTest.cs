@@ -41,7 +41,7 @@ namespace entra21_tests
             
             // Estamos acessando a PROPRIEDADE Candidates, que faz parte do ESTADO do OBJETO election
             Assert.True(election.Candidates.Count==1);
-            Assert.True(election.Candidates[0].name == candidate.name);
+            Assert.True(election.candidates[0].Name == candidates[0].Name);
         }
 
         [Fact]
@@ -51,14 +51,14 @@ namespace entra21_tests
 
             // OBJETO election
             var election = new Election();
-            (string name, string cpf) jose = ("José","180.625.639-87");
-            (string name, string cpf) ana = ("Ana","111.222.333-44");
-            var candidates = new List<(string,string)>{jose, ana};
+            var jose = new Candidate("José","180.625.639-87");
+            var ana = new Candidate("Ana","111.222.333-44");
+            var candidates = new List<Candidate>{jose,ana};
             election.CreateCandidates(candidates, "Pa$$w0rd");
             
             // Quando / Ação
-            var candidatejose = election.GetCandidateIdByName(jose.name);
-            var candidateana = election.GetCandidateIdByName(ana.name);
+            var candidatejose = election.GetCandidateIdByName(jose.Name);
+            var candidateana = election.GetCandidateIdByName(ana.Name);
 
             // Deve / Asserções
             Assert.NotEqual(candidateana, candidatejose);
@@ -71,12 +71,12 @@ namespace entra21_tests
 
             // OBJETO election
             var election = new Election();
-            (string name, string cpf) jose1 = ("José","180.625.639-87");
-            (string name, string cpf) joao = ("João","123.456.789.12");
-            (string name, string cpf) jose2 = ("José","987.654.321.98");
-            (string name, string cpf) ana = ("Ana","111.222.333-44");
-            (string name, string cpf) jose3 = ("José","999.999.999.99");
-            var candidates = new List<(string,string)>{jose1, joao, jose2, ana, jose3};
+            var jose1 = new Candidate("José","180.625.639-87");
+            var joao = new Candidate("João","123.456.789.12");
+            var jose2 = new Candidate("José","987.654.321-98");
+            var ana = new Candidate("Ana","111.222.333-44");
+            var jose3 = new Candidate("José","999.999.999-99");
+            var candidates = new List<Candidate>{jose1,joao,jose2,ana,jose3};
             election.CreateCandidates(candidates, "Pa$$w0rd");
             
             // Quando / Ação
@@ -96,21 +96,21 @@ namespace entra21_tests
 
             // OBJETO election
             var election = new Election();
-            (string name, string cpf) jose1 = ("José","180.625.639-87");
-            (string name, string cpf) joao = ("João","123.456.789.12");
-            (string name, string cpf) jose2 = ("José","987.654.321.98");
-            (string name, string cpf) ana = ("Ana","111.222.333-44");
-            (string name, string cpf) jose3 = ("José","999.999.999.99");
-            var candidates = new List<(string,string)>{jose1, joao, jose2, ana, jose3};
+            var jose1 = new Candidate("José","180.625.639-87");
+            var joao = new Candidate("João","123.456.789.12");
+            var jose2 = new Candidate("José","987.654.321-98");
+            var ana = new Candidate("Ana","111.222.333-44");
+            var jose3 = new Candidate("José","999.999.999-99");
+            var candidates = new List<Candidate>{jose1,joao,jose2,ana,jose3};
             election.CreateCandidates(candidates, "Pa$$w0rd");
             
             // Quando / Ação
             var candidatesList = election.GetCandidatesByName("José");
             //var expectedIds = new List<Guid>{};
             // Deve / Asserções
-            Assert.Equal("180.625.639-87",candidatesList[0].cpf);
-            Assert.Equal("987.654.321.98",candidatesList[1].cpf);
-            Assert.Equal("999.999.999.99",candidatesList[2].cpf);
+            Assert.Equal("180.625.639-87",candidatesList[0].Cpf);
+            Assert.Equal("987.654.321-98",candidatesList[1].Cpf);
+            Assert.Equal("999.999.999-99",candidatesList[2].Cpf);
         }
 
         [Fact]
@@ -120,17 +120,17 @@ namespace entra21_tests
 
             // OBJETO election
             var election = new Election();
-            (string name, string cpf) jose1 = ("José","180.625.639-87");
-            (string name, string cpf) joao = ("João","123.456.789.12");
-            (string name, string cpf) jose2 = ("José","987.654.321.98");
-            (string name, string cpf) ana = ("Ana","111.222.333-44");
-            (string name, string cpf) jose3 = ("José","999.999.999.99");
-            var candidates = new List<(string,string)>{jose1, joao, jose2, ana, jose3};
+            var jose1 = new Candidate("José","180.625.639-87");
+            var joao = new Candidate("João","123.456.789.12");
+            var jose2 = new Candidate("José","987.654.321-98");
+            var ana = new Candidate("Ana","111.222.333-44");
+            var jose3 = new Candidate("José","999.999.999-99");
+            var candidates = new List<Candidate>{jose1,joao,jose2,ana,jose3};
             election.CreateCandidates(candidates, "Pa$$w0rd");
             
             // Quando / Ação
             var candidatesJoseCpf = election.GetCandidatesCpfByName("José");
-            var expectedCpfs = new List<string>{"180.625.639-87","987.654.321.98","999.999.999.99"};
+            var expectedCpfs = new List<string>{"180.625.639-87","987.654.321-98","999.999.999-99"};
             // Deve / Asserções
             Assert.Equal(3,candidatesJoseCpf.Count);
             Assert.NotEqual(candidatesJoseCpf[0],candidatesJoseCpf[1]);
@@ -145,14 +145,14 @@ namespace entra21_tests
             // Dado / Setup
             // OBJETO election
             var election = new Election();
-            (string name, string cpf) ana = ("Ana","111.222.333-44");
-            (string name, string cpf) fernando = ("Fernando","444.333.222-11");
-            var candidates = new List<(string, string)>{fernando, ana};
+            var ana = new Candidate("Ana","111.222.333-44");
+            var fernando = new Candidate ("Fernando","444.333.222-11");
+            var candidates = new List<Candidate>{fernando, ana};
             election.CreateCandidates(candidates, "Pa$$w0rd");
             //var fernandoId = election.GetCandidateIdByName(fernando.name);
             //var anaId = election.GetCandidateIdByName(ana.name);
-            var fernandoId = election.GetCandidateIdByCpf(fernando.cpf);
-            var anaId = election.GetCandidateIdByCpf(ana.cpf);
+            var fernandoId = election.GetCandidateIdByCpf(fernando.Cpf);
+            var anaId = election.GetCandidateIdByCpf(ana.Cpf);
 
             // Quando / Ação
             // Estamos acessando o MÉTODO ShowMenu do OBJETO election
@@ -160,10 +160,10 @@ namespace entra21_tests
             election.Vote(fernandoId);
 
             // Deve / Asserções
-            var candidateFernando = election.Candidates.Find(x => x.id == fernandoId);
-            var candidateana = election.Candidates.Find(x => x.id == anaId);
-            Assert.Equal(2, candidateFernando.votes);
-            Assert.Equal(0, candidateana.votes);
+            var candidateFernando = election.Candidates.Find(x => x.Id == fernandoId);
+            var candidateana = election.Candidates.Find(x => x.Id == anaId);
+            Assert.Equal(2, candidateFernando.Votes);
+            Assert.Equal(0, candidateana.Votes);
         }
 
         [Fact]
@@ -172,11 +172,11 @@ namespace entra21_tests
             // Dado / Setup
             // OBJETO election
             var election = new Election();
-            (string name, string cpf) ana = ("Ana","111.222.333-44");
-            (string name, string cpf) fernando = ("Fernando","444.333.222-11");
-            var candidates = new List<(string, string)>{fernando, ana};
+            var ana = new Candidate("Ana","111.222.333-44");
+            var fernando = new Candidate ("Fernando","444.333.222-11");
+            var candidates = new List<Candidate>{fernando, ana};
             election.CreateCandidates(candidates, "Pa$$w0rd");
-            var anaId = election.GetCandidateIdByName(ana.name);
+            var anaId = election.GetCandidateIdByName(ana.Name);
             
             // Quando / Ação
             // Estamos acessando o MÉTODO ShowMenu do OBJETO election
@@ -186,8 +186,8 @@ namespace entra21_tests
 
             // Deve / Asserções
             Assert.True(winners.Count == 1);
-            Assert.Equal(anaId, winners[0].id);
-            Assert.Equal(2, winners[0].votes);
+            Assert.Equal(anaId, winners[0].Id);
+            Assert.Equal(2, winners[0].Votes);
         }
 
         [Fact]
@@ -196,12 +196,12 @@ namespace entra21_tests
             // Dado / Setup
             // OBJETO election
             var election = new Election();
-            (string name, string cpf) ana = ("Ana","111.222.333-44");
-            (string name, string cpf) fernando = ("Fernando","444.333.222-11");
-            var candidates = new List<(string, string)>{fernando, ana};
+            var ana = new Candidate("Ana","111.222.333-44");
+            var fernando = new Candidate ("Fernando","444.333.222-11");
+            var candidates = new List<Candidate>{fernando, ana};
             election.CreateCandidates(candidates, "Pa$$w0rd");
-            var fernandoId = election.GetCandidateIdByName(fernando.name);
-            var anaId = election.GetCandidateIdByName(ana.name);
+            var fernandoId = election.GetCandidateIdByName(fernando.Name);
+            var anaId = election.GetCandidateIdByName(ana.Name);
             
             // Quando / Ação
             // Estamos acessando o MÉTODO ShowMenu do OBJETO election
@@ -210,10 +210,10 @@ namespace entra21_tests
             var winners = election.GetWinners();
 
             // Deve / Asserções
-            var candidateFernando = winners.Find(x => x.id == fernandoId);
-            var candidateana = winners.Find(x => x.id == anaId);
-            Assert.Equal(1, candidateFernando.votes);
-            Assert.Equal(1, candidateana.votes);
+            var candidateFernando = winners.Find(x => x.Id == fernandoId);
+            var candidateana = winners.Find(x => x.Id == anaId);
+            Assert.Equal(1, candidateFernando.Votes);
+            Assert.Equal(1, candidateana.Votes);
         }
     }
 }
