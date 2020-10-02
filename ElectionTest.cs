@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace entra21_tests
@@ -41,7 +42,7 @@ namespace entra21_tests
             
             // Estamos acessando a PROPRIEDADE Candidates, que faz parte do ESTADO do OBJETO election
             Assert.True(election.Candidates.Count==1);
-            Assert.True(election.candidates[0].Name == candidates[0].Name);
+            Assert.True(election.Candidates.First().Name == candidates.First().Name);
         }
 
         [Fact]
@@ -160,8 +161,8 @@ namespace entra21_tests
             election.Vote(fernandoId);
 
             // Deve / Asserções
-            var candidateFernando = election.Candidates.Find(x => x.Id == fernandoId);
-            var candidateana = election.Candidates.Find(x => x.Id == anaId);
+            var candidateFernando = election.Candidates.First(x => x.Id == fernandoId);
+            var candidateana = election.Candidates.First(x => x.Id == anaId);
             Assert.Equal(2, candidateFernando.Votes);
             Assert.Equal(0, candidateana.Votes);
         }

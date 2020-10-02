@@ -8,7 +8,7 @@ namespace entra21_tests
     {
         // Propriedade abaixo:
         // Sempre em PascalCase
-        public List<Candidate> Candidates { get; private set; }
+        public IReadOnlyCollection<Candidate> Candidates { get; private set; }
         
         public bool CreateCandidates(List<Candidate> candidate, string password)
         {
@@ -72,18 +72,18 @@ namespace entra21_tests
 
         public List<Candidate> GetWinners()
         {
-            var winners = new List<Candidate>{Candidates[0]};
+            var winners = new List<Candidate>{Candidates.First()};
 
-            for (int i = 1; i < Candidates.Count; i++)
+            foreach (var item in Candidates)
             {
-                if (Candidates[i].Votes > winners[0].Votes)
+                if (item.Votes > winners[0].Votes)
                 {
                     winners.Clear();
-                    winners.Add(Candidates[i]);
+                    winners.Add(item);
                 }
-                else if (Candidates[i].Votes == winners[0].Votes)
+                else if (item.Votes == winners[0].Votes)
                 {
-                    winners.Add(Candidates[i]);
+                    winners.Add(item);
                 }
             }
             return winners;
