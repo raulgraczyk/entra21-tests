@@ -16,5 +16,15 @@ namespace entra21_tests
             Cpf = cpf;
             Votes = 0;
         }
+
+        public void Vote(Guid id)
+        {
+            Election.candidates.First(candidate => candidate.Id == id).Votes++;
+                    //return candidate.Id == id
+                    //? (Candidate.Vote +1)
+                    //: candidate;
+           // }).ToList();
+        }
+
     }
 }

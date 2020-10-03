@@ -19,7 +19,7 @@ namespace entra21_tests
             var created = election.CreateCandidates(candidates, "incorrect");
 
             // Deve / Asserções
-            Assert.Null(election.Candidates);
+            Assert.Empty(election.Candidates);
             Assert.False(created);
         }
 
@@ -157,7 +157,7 @@ namespace entra21_tests
 
             // Quando / Ação
             // Estamos acessando o MÉTODO ShowMenu do OBJETO election
-            election.Vote(fernandoId);
+            Candidate.Vote(fernandoId);
             election.Vote(fernandoId);
 
             // Deve / Asserções

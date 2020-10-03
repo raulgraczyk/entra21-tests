@@ -8,18 +8,30 @@ namespace entra21_tests
     {
         // Propriedade abaixo:
         // Sempre em PascalCase
-        public IReadOnlyCollection<Candidate> Candidates { get; private set; }
-        
+
+        private List<Candidate> candidates { get; set; }
+        public IReadOnlyCollection<Candidate> Candidates => candidates;
+
+        public Election()
+        {
+            candidates = new List<Candidate>();
+        }
+
         public bool CreateCandidates(List<Candidate> candidate, string password)
         {
             if (password == "Pa$$w0rd")
             {
-                Candidates = candidate;
+                if(candidate == null)
+                {
+                    return true;
+                }
+                candidates = candidate;
 
                 return true;
             }
             else
             {
+                
                 return false;
             }
         }
@@ -49,14 +61,14 @@ namespace entra21_tests
             return Candidates.First(x => x.Cpf == cpf).Id;
         }
 
-        public void Vote(Guid id)
-        {
-            Candidates.First(candidate => candidate.Id == id).Votes++;
-                    //return candidate.Id == id
-                    //? (Candidate.Vote +1)
-                    //: candidate;
-           // }).ToList();
-        }
+        // public void Vote(Guid id)
+        // {
+        //     Candidates.First(candidate => candidate.Id == id).Votes++;
+        //             //return candidate.Id == id
+        //             //? (Candidate.Vote +1)
+        //             //: candidate;
+        //    // }).ToList();
+        // }
 
         public List<Guid> GetCandidatesIdByName(string name)
         {
@@ -69,6 +81,25 @@ namespace entra21_tests
             var foundCandidates = Candidates.Where(x => x.Name == name);
             return foundCandidates.ToList();
         }
+
+        // public List<Candidate> GetWinners()
+        // {
+        //     var winners = new List<Candidate>{Candidates.First()};
+
+        //     foreach (var item in Candidates)
+        //     {
+        //         if (item.Votes > winners[0].Votes)
+        //         {
+        //             winners.Clear();
+        //             winners.Add(item);
+        //         }
+        //         else if (item.Votes == winners[0].Votes)
+        //         {
+        //             winners.Add(item);
+        //         }
+        //     }
+        //     return winners;
+        // }
 
         public List<Candidate> GetWinners()
         {
