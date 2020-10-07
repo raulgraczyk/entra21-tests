@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace entra21_tests
+namespace Domain
 {
     public class Election
     {
@@ -61,14 +61,11 @@ namespace entra21_tests
             return Candidates.First(x => x.Cpf == cpf).Id;
         }
 
-        // public void Vote(Guid id)
-        // {
-        //     Candidates.First(candidate => candidate.Id == id).Votes++;
-        //             //return candidate.Id == id
-        //             //? (Candidate.Vote +1)
-        //             //: candidate;
-        //    // }).ToList();
-        // }
+        public void Vote(Guid id)
+        {
+            var voteCandidate = Candidates.First(candidate => candidate.Id == id);
+            voteCandidate.Vote();
+        }
 
         public List<Guid> GetCandidatesIdByName(string name)
         {

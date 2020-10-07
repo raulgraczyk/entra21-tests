@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
+using Domain;
 
-namespace entra21_tests
+namespace Tests
 {
     public class ElectionTest
     {
@@ -157,7 +158,7 @@ namespace entra21_tests
 
             // Quando / Ação
             // Estamos acessando o MÉTODO ShowMenu do OBJETO election
-            Candidate.Vote(fernandoId);
+            election.Vote(fernandoId);
             election.Vote(fernandoId);
 
             // Deve / Asserções
@@ -165,6 +166,7 @@ namespace entra21_tests
             var candidateana = election.Candidates.First(x => x.Id == anaId);
             Assert.Equal(2, candidateFernando.Votes);
             Assert.Equal(0, candidateana.Votes);
+            //Election.Candidates.ElementAt(1).Votes
         }
 
         [Fact]

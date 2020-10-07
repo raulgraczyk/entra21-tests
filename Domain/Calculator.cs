@@ -1,6 +1,6 @@
-namespace entra21_tests
+namespace Domain
 {
-    class Calculator
+    public class Calculator
     {
         public double Sum(double firstNumber, double secondNumber)
         {

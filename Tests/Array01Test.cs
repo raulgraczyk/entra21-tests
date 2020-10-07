@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using Domain;
 using Xunit;
 
-namespace entra21_tests
+namespace Tests
 {
     public class Array01Test
     {
@@ -13,7 +14,7 @@ namespace entra21_tests
         public void test_exercise1_of_array01(double[] a, double[] b, double[] expected)
         {
             // Dado / Setup
-            var array01 = new array01();
+            var array01 = new Array01();
 
             // Quando / Ação
             var result = array01.AExercise1(a,b);
@@ -33,7 +34,7 @@ namespace entra21_tests
         public void test_exercise2_of_array01(double[] a, double[] expected)
         {
             // Dado / Setup
-            var array01 = new array01();
+            var array01 = new Array01();
 
             // Quando / Ação
             var result = array01.AExercise2(a);
@@ -53,7 +54,7 @@ namespace entra21_tests
         public void test_exercise3_of_array01(double[] a, double num, string expected)
         {
             // Dado / Setup
-            var array01 = new array01();
+            var array01 = new Array01();
 
             // Quando / Ação
             var result = array01.AExercise3(a, num);
@@ -70,7 +71,7 @@ namespace entra21_tests
         public void test_exercise4_of_array01(double[] a, double[] b, string expected)
         {
             // Dado / Setup
-            var array01 = new array01();
+            var array01 = new Array01();
 
             // Quando / Ação
             string result = array01.AExercise4(a, b);
@@ -87,7 +88,7 @@ namespace entra21_tests
         public void test_exercise5_of_array01(double[] a, int[] expected)
         {
             // Dado / Setup
-            var array01 = new array01();
+            var array01 = new Array01();
 
             // Quando / Ação
             var result = array01.AExercise5(a);
@@ -103,7 +104,7 @@ namespace entra21_tests
         public void test_exercise6_of_array01(double[] a, double[] b, double[] expected)
         {
             // Dado / Setup
-            var array01 = new array01();
+            var array01 = new Array01();
 
             // Quando / Ação
             var result = array01.AExercise6(a, b);

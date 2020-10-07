@@ -1,13 +1,13 @@
 using System;
 
-namespace entra21_tests
+namespace Domain
 {
     public class Candidate
     {
         public Guid Id { get; private set; }
         public string Name { get; private set; }
         public string Cpf { get; private set; }
-        public int Votes { get; set; }
+        public int Votes { get; private set; }
 
         public Candidate(string name, string cpf)
         {
@@ -17,13 +17,9 @@ namespace entra21_tests
             Votes = 0;
         }
 
-        public void Vote(Guid id)
+        public void Vote()
         {
-            Election.candidates.First(candidate => candidate.Id == id).Votes++;
-                    //return candidate.Id == id
-                    //? (Candidate.Vote +1)
-                    //: candidate;
-           // }).ToList();
+            Votes++;
         }
 
     }
