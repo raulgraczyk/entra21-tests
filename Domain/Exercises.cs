@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Domain
 {
-    class Exercises
+    public class Exercises
     {
         public int[] Exercise1A()
         {
