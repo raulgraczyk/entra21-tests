@@ -12,21 +12,21 @@ namespace Tests
         public void Should_contains_same_parameters_provided()
         {
             var name = "João da Silva";
-            var CPF = "895.658.478-89";
+            var cpf = "895.658.478-89";
             
-            var candidate = new Candidate(name, CPF);
+            var candidate = new Candidate(name, cpf);
 
             Assert.Equal(name, candidate.Name);
-            Assert.Equal(CPF, candidate.CPF);
+            Assert.Equal(cpf, candidate.Cpf);
         }
 
         [Fact]
         public void Should_contains_votes_equals_zero()
         {
             var name = "João da Silva";
-            var CPF = "895.658.478-89";
+            var cpf = "895.658.478-89";
 
-            var candidate = new Candidate(name, CPF);
+            var candidate = new Candidate(name, cpf);
 
             Assert.Equal(0, candidate.Votes);
         }
@@ -35,8 +35,8 @@ namespace Tests
         public void Should_contain_votes_equals_2_when_voted_twice()
         {
             var name = "João da Silva";
-            var CPF = "895.658.478-89";
-            var candidate = new Candidate(name, CPF);
+            var cpf = "895.658.478-89";
+            var candidate = new Candidate(name, cpf);
 
             candidate.Vote();
             candidate.Vote();
@@ -52,7 +52,7 @@ namespace Tests
             
             Assert.NotEqual(Jose.Id, Ana.Id);
         }
-        
+               
         [Theory]
         [InlineData("")]
         [InlineData("000.000.000-00")]
@@ -64,15 +64,47 @@ namespace Tests
         [InlineData("640.368.560-6")]
         [InlineData("640.368.560-6a")]
         [InlineData("640.368.560-061")]
-        [InlineData("640.368.560-061")]
-        [InlineData("640.368.560-061")]
-        public void should_not_create_candidates_when_password_is_incorrect(string Cpf)
+        [InlineData("640,368.560-061")]
+        [InlineData("640;368.560-061")]
+        [InlineData("640..368.560-061")]
+        [InlineData("640:368.560-061")]
+        public void should_not_create_candidates_when_cpf_is_invalid(string Cpf)
         {
             // Dado / Setup
-            var jose = new Candidate("José",Cpf);
+            var jose = new Candidate("Jose",Cpf);
 
             // Quando / Ação
-            var isValid = jose.Validate();
+            var isValid = jose.ValidateCpf();
+
+            // Deve / Asserções
+            Assert.False(isValid);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("Jose ")]
+        [InlineData(" Jose")]
+        [InlineData(" Jose Couto")]
+        [InlineData("Jose Couto ")]
+        [InlineData("Jose Cou1o")]
+        [InlineData("Jose.Cou1o")]
+        [InlineData("Jose Cou1o@")]
+        [InlineData("123123 123123")]
+        [InlineData(null)]
+        [InlineData(" ")]
+        [InlineData("Armando")]
+        [InlineData("Armando  ")]
+        [InlineData("Armando d")]
+        [InlineData("Armando 9")]
+        [InlineData("Armando9 Oliveira")]
+        [InlineData("Armando Oliveira Mendes8")]
+        public void should_not_create_candidates_when_name_is_invalid(string Name)
+        {
+            // Dado / Setup
+            var candidate = new Candidate(Name,"456.456.214-78");
+
+            // Quando / Ação
+            var isValid = candidate.ValidateName();
 
             // Deve / Asserções
             Assert.False(isValid);
