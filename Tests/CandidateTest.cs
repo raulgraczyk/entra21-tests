@@ -74,7 +74,7 @@ namespace Tests
             var jose = new Candidate("Jose",Cpf);
 
             // Quando / Ação
-            var isValid = jose.ValidateCpf();
+            var isValid = jose.Validate().isValid;
 
             // Deve / Asserções
             Assert.False(isValid);
@@ -104,10 +104,26 @@ namespace Tests
             var candidate = new Candidate(Name,"456.456.214-78");
 
             // Quando / Ação
-            var isValid = candidate.ValidateName();
+            var isValid = candidate.Validate().isValid;
 
             // Deve / Asserções
             Assert.False(isValid);
+        }
+
+        [Theory]
+        [InlineData("Tiago Sá", "64036856006")]
+        [InlineData("Lucas Oliveira da Silva", "640.368.560-06")]
+        [InlineData("Raul Tomaz Graczyk", "057.413.889.73")]
+        public void Should_return_true_when_CPF_and_name_is_valid(string name, string CPF)
+        {
+            // Dado / Setup
+            var candidate = new Candidate(name, CPF);
+
+            // When / Ação
+            var isValid = candidate.Validate().isValid;
+            
+            // Deve / Asserções
+            Assert.True(isValid);
         }
     }
 }
